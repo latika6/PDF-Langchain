@@ -21,10 +21,10 @@ from langchain.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.questions_answering import laod_qa_chain
 from langchain.prompts import PromptTemplate
-from dotenv import laod_dotenv
+from dotenv import load_dotenv
 
 load_dotenv()
-
+ 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_pdf_text(pdf_docs):
@@ -41,8 +41,8 @@ def get_text_chunks(text):
   return chunks
 
 def get_vector_store(text_chunks):
-  embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001')
-  vector_store = FIASS.from_text(text_chunks, embedding = embeddings)
+  embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
+  vector_store = FAISS.from_text(text_chunks, embedding = embeddings)
   vector_store.save_local("faiss_index")
 
 def get_conversational_chain():
@@ -56,10 +56,10 @@ def get_conversational_chain():
   Answer:
   """
 
- model = ChatGoogleGenerativeAI(model = "gemini-pro", temperature=0.3)
- PromptTemplate(template = prompt_template, input_variables = "context", "question"))
- chain = load_qa_chain(model, chain_type = "stuff", prompt = prompt)
- return chain
+  model = ChatGoogleGenerativeAI(model = "gemini-pro", temperature=0.3)
+  PromptTemplate(template = prompt_template, input_variables = ("context", "question"))
+  chain = laod_qa_chain(model, chain_type = "stuff", prompt = prompt)
+  return chain
 
 def user_input(user_question):
   embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
@@ -75,7 +75,7 @@ print(response)
 st.write("Reply:", response["output_text"])
 
 def main():
-  st.set_page_confi("Chat with Multiple PDF")
+  st.set_page_config("Chat with Multiple PDF")
   st.header("Chat with Multiple PDF using Gemini")
 
   user_question = st.text_input("As question from the PDF file")
@@ -85,7 +85,7 @@ def main():
 
   with st.sidebar:
     st.title("Menu")
-    pdf_docs = st.file_uplaoder("Uplaod your PDF files and click on the submit and process")
+    pdf_docs = st.file_uploader("Uplaod your PDF files and click on the submit and process")
     if st.button("Submit & Process"):
       with st.spinner("Processing..."):
         raw_text = get_pdf_text(pdf_docs)
