@@ -85,4 +85,12 @@ def main():
 
   with st.sidebar:
     st.title("Menu")
-    pdf_docs = st.file_uplaoder("Uplaod your 
+    pdf_docs = st.file_uplaoder("Uplaod your PDF files and click on the submit and process")
+    if st.button("Submit & Process"):
+      with st.spinner("Processing..."):
+        raw_text = get_pdf_text(pdf_docs)
+        text_chunks = get_text_chunks(raw_text)
+        get_vector_store(text_chunks)
+        st.success("Done")
+
+
