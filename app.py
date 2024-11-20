@@ -9,7 +9,7 @@
 # langchain
 # PyPDF2
 # faiss-cpu
-# langchaib_google_genai to access the google and gen api
+# langchain_google_genai to access the google and gen api
 
 import streamlit as st
 from PyPDF2 import PdfReader
