@@ -35,6 +35,8 @@ def get_pdf_text(pdf_docs):
       text+=page.extract_text()
     return text
 
+# The `RecursiveCharacterTextSplitter` is a tool from LangChain that splits large documents into smaller chunks while preserving context. 
+# It uses a hierarchical splitting approach based on delimiters like paragraphs, sentences, and words.
 def get_text_chunks(text):
   text_splitter = RecursiveCharacterTextSplitter(chunk_size = 10000, chunk_overlap = 1000)
   chunks = text_splitter.split_text(text)
