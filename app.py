@@ -42,6 +42,8 @@ def get_text_chunks(text):
   chunks = text_splitter.split_text(text)
   return chunks
 
+# FAISS (Facebook AI Similarity Search) is a library for efficient similarity search and clustering of dense vectors, optimized for large datasets. 
+# It is widely used in applications like document retrieval and recommendation systems to find nearest neighbors quickly.
 def get_vector_store(text_chunks):
   embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
   vector_store = FAISS.from_text(text_chunks, embedding = embeddings)
