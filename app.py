@@ -10,6 +10,7 @@
 # PyPDF2
 # faiss-cpu
 # langchain_google_genai to access the google and gen api
+# A vector database is a database that stores, indexes, and queries data as multi-dimensional vectors, also known as vector embeddings:
 
 import streamlit as st
 from PyPDF2 import PdfReader
